@@ -33,21 +33,21 @@ const {
 		</style>
 	</head>
 
-	<body>
+	<body class="bg-base text-text">
 		<Header />
 		<main>
 			<article>
 				{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-				<h1 class="title">{title}</h1>
-				{pubDate && <time>{pubDate}</time>}
+				<h1 class="title text-subtext0">{title}</h1>
+				{pubDate && <time class="text-overlay1">{pubDate}</time>}
 				{
 					updatedDate && (
-						<div>
+						<div class="text-overlay1">
 							Last updated on <time>{updatedDate}</time>
 						</div>
 					)
 				}
-				<hr />
+				<hr class="border-overlay0"/>
 				<slot />
 			</article>
 		</main>
