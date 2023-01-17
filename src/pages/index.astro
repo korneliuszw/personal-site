@@ -2,7 +2,72 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ProjectComponent, {Props as Project, ProjectType} from '../components/Project.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+
+const projects: Project[] = [
+	{
+		name: 'React Frontend Internship',
+		shortDescription: "From April 2022 to October 2022, I had an opportunity to work in a nice local company, creating a web application with React",
+		technologies: ['React', 'TypeScript', 'SCSS'],
+		type: ProjectType.Job
+	},
+	{
+		name: 'Topcoder',
+		shortDescription: "Scored a prize in couple challenges (more than 10)",
+		technologies: ['Angular', 'React', 'NodeJS'],
+		link: 'https://topcoder.com/members/korneliuszw',
+		type: ProjectType.Freelance
+	},
+	{
+		name: 'This website',
+		shortDescription: 'I was looking for a modern, easy and customizable JS framework for blogs. I heard about Gatsby but after skimming the docs, I consider it an overkill. Hugo and Jerkyll have their weird templating DSLs and I hate the Hugo one, so I went with Atro.',
+		technologies: ['Astro', 'Tailwind'],
+		type: ProjectType.WorkInProgress
+	},
+	{
+		name: 'uwudrop',
+		shortDescription: 'Simple file uploader to check out Django and Svelte integration',
+		link: 'https://github.com/korneliuszw/uwudrop',
+		technologies: ['Python', 'Svelte', 'Django'],
+		type: ProjectType.WorkInProgress
+	}, 
+	{
+		name: 'sfml-snake',
+		shortDescription: 'Terrible snake game for a school project',
+		technologies: ['C++', 'SFML'],
+		link: 'https://github.com/korneliuszw/sfml-snake',
+		type: ProjectType.Finished
+	},
+	{
+		name: 'Pogo',
+		shortDescription: 'Basic time scheduling with notifications. Made to get know how notifications work and take a look at Laravel',
+		link: 'https://github.com/korneliuszw/Pogo',
+		technologies: ['Laravel', 'React'],
+		type: ProjectType.Finished,
+
+	}, {
+		name: 'Daya',
+		shortDescription: 'Week scheeduler, first React project',
+		link: 'https://git.kawuka.xyz/kawuka/daya',
+		technologies: ['React', 'Redux'],
+		type: ProjectType.WorkInProgress
+	}, {
+		name: 'Old personal blog',
+		shortDescription: 'Minimal blog made with Emacs org-mode HTML exporter',
+		link: 'https://git.kawuka.xyz/kawuka/kawuka.xyz',
+		technologies: [],
+		type: ProjectType.Finished,
+	}, {
+		name: 'Dropbox auto-saver',
+		shortDescription: 'GTK app to save preconfigured app\'s files whenever the app closes. My shot at 24h Hackatons and Rust. I did not finish it in time, it was fun anyway',
+		link: 'https://github.com/korneliuszw/app_data_cloud_saver',
+		technologies: ['Rust', 'GTK'],
+		type: ProjectType.WorkInProgress
+
+	}
+]
 ---
 
 <!DOCTYPE html>
@@ -10,40 +75,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="bg-base">
 		<Header title={SITE_TITLE} />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<Hero name="kawuka" title="Hey, I'm " subtitle={`
+				A software engineer in making.
+			`} description={`AKA korneliuszw
+				I'm a last year high school student from Poland.
+				I've been interested in Computer Science since middle school.
+				I jump programming languages and technologies for fun, yet I love JS/TS.
+				Beside CS, I also read philosophy in my free time and hit the gym.
+			`} heroImg="kyon.webp"/>
+			{projects.map(project => <ProjectComponent {...project}/>)}
 		</main>
 		<Footer />
 	</body>
