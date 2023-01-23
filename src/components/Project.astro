@@ -1,5 +1,4 @@
 ---
-import githubLogo from './github.svg'
 export enum ProjectType {
     WorkInProgress = "WIP",
     Finished = "DONE",
@@ -11,33 +10,44 @@ export interface Props {
     link?: string;
     shortDescription: string;
     technologies: string[];
-    projectType: Type;
+    type: ProjectType;
 }
 
-const technologyColors = {
-    "Python": "bg-blue",
-    "Django": "bg-green",
-    "Svelte": "bg-maroon text-white"
+const technologyColors: Record<string, string> = {
+    "Python": "bg-blue-500 text-white",
+    "Django": "bg-cp-green",
+    "Svelte": "bg-cp-maroon text-white",
+    "React": "bg-blue-400 text-white",
+    "TypeScript": "bg-blue-300 text-white",
+    "Angular": "bg-red-500 text-white",
+    "NodeJS": "bg-green-300",
+    "Astro": "bg-orange-600 text-white",
+    "Tailwind": "bg-sky-300 text-slate-100",
+    "SCSS": "bg-pink-300 text-white"
 }
 
 function mapTechnologyToColor(technology: string) {
-    return technologyColors[technology] ?? "text-red"
+    return technologyColors[technology] ?? "text-cp-red"
 }
 
-const { name, link, shortDescription, technologies, projectType } = Astro.props;
+const { name, link, shortDescription, technologies, type } = Astro.props;
+
+const icon = (link && link.startsWith('https://git')) ? 'fa-brands fa-github-alt' : 'fa-solid fa-link'
+
+// TODO: Improve responsibility by moving badges to a different flex with set basis and wrap
 ---
 
-<div class={`rounded-md ${projectType} flex gap-2 items-center shadow-md shadow-rosewater p-2`}>
+<div class={`rounded-md ${type} flex gap-2 items-center shadow-md shadow-cp-rosewater p-2`}>
     <div class="flex-1">
-        <div class={`text-overlay0 font-bold text-xl`}>
+        <div class={`text-cp-overlay0 font-bold text-xl`}>
             {name}
             {link && 
                 <a href={link}>
-                    <i alt="Github logo" class="text-md inline-block text-text fa-brands fa-github-alt">
+                    <i alt="Github logo" class={`text-md inline-block text-cp-text ${icon}`}>
                 </a>
             }
         </div>
-        <div class="text-text">{shortDescription}</div>
+        <div class="text-cp-text">{shortDescription}</div>
     </div>
     {technologies.map(s => <div class={`${mapTechnologyToColor(s)} rounded-2xl px-2 py-1 text-center text-md`}>{s}</div>)}
 </div>

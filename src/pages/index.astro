@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 import ProjectComponent, {Props as Project, ProjectType} from '../components/Project.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import StyledBody from '../components/StyledBody.astro';
 
 const projects: Project[] = [
 	{
@@ -75,7 +76,7 @@ const projects: Project[] = [
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="bg-base">
+	<StyledBody class="bg-cp-base">
 		<Header title={SITE_TITLE} />
 		<main>
 			<Hero name="kawuka" title="Hey, I'm " subtitle={`
@@ -89,5 +90,5 @@ const projects: Project[] = [
 			{projects.map(project => <ProjectComponent {...project}/>)}
 		</main>
 		<Footer />
-	</body>
+	</StyledBody>
 </html>

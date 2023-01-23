@@ -9,12 +9,12 @@ export interface Props {
 const { heroImg, title, description, name, subtitle } = Astro.props;
 ---
 
-<div class="flex w-full shadow-flamingo">
+<div class="flex w-full shadow-cp-flamingo">
     <div class="flex-col flex-1 m-5 ml-0">
-        <div class="text-4xl text-peach font-bold">{title} <span class="text-green">{name}</span></h1>
-        <div class="text-2xl text-blue">{subtitle}</div>
-        <div class="text-text pt-2 text-xl whitespace-pre-line">{description}</div>
-        <div class="text-rosewater text-xl">Pleased to meet you!</div>
+        <div class="text-4xl text-cp-peach font-bold">{title} <span class="text-cp-green">{name}</span></h1>
+        <div class="text-2xl text-pc-blue">{subtitle}</div>
+        <div class="text-cp-text pt-2 text-xl whitespace-pre-line">{description}</div>
+        <div class="text-cp-rosewater text-xl">Pleased to meet you!</div>
     </div>
     <div class="basis-1/4 sm:block hidden">
         <img src={heroImg}/>

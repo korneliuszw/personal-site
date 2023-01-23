@@ -6,7 +6,8 @@ module.exports = {
 	},
 	plugins: [
 		require('@catppuccin/tailwindcss')({
-			defaultFlavour: 'macchiato'
+			defaultFlavour: 'macchiato',
+			prefix: 'cp'
 		})
 	],
 }
