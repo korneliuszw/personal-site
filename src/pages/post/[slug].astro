@@ -1,0 +1,41 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import StyledBody from "../../components/StyledBody.astro";
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { ghostClient } from "../../lib/ghost";
+export async function getStaticPaths() {
+    const posts = await ghostClient.posts.browse({
+        limit: 'all'
+    })
+    // Map posts into params
+    return posts.map(post => {
+        return {
+            params: {
+                slug: post.slug
+            },
+            props: {
+                post
+            }
+        }
+    })
+}
+
+const {post} = Astro.props
+---
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<BaseHead title={post.title} description={post.description} />
+	<StyledBody>
+		<Header />
+		<main class="text-lg leading-6 md:w-">
+            <h1 class="text-cp-subtext0 text-3xl">{post.title}</h1>
+            <p class="text-sm">{post.reading_time} min to read</p>
+
+            <Fragment set:html={post.html}/>
+		</main>
+		<Footer />
+	</StyledBody>
+</html>

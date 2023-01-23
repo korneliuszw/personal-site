@@ -4,12 +4,17 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 import StyledBody from '../components/StyledBody.astro';
+import { ghostClient } from '../lib/ghost';
+
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
-const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
-);
-console.log(posts)
+// const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+// 	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+// );
+
+const posts = await ghostClient.posts.browse({
+	limit: 'all'
+})
 ---
 
 <!DOCTYPE html>
@@ -24,14 +29,14 @@ console.log(posts)
 					{
 						posts.map((post) => (
 							<li>
-								<time datetime={post.frontmatter.pubDate}>
-									{new Date(post.frontmatter.pubDate).toLocaleDateString('en-us', {
+								<time datetime={post.published_at}>
+									{new Date(post.published_at).toLocaleDateString('en-us', {
 										year: 'numeric',
 										month: 'short',
 										day: 'numeric',
 									})}
 								</time>
-								<a href={post.url}>{post.frontmatter.title}</a>
+								<a href={`/post/${post.slug}`}>{post.title}</a>
 							</li>
 						))
 					}

@@ -1,10 +1,17 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../config';
+
+export interface Props {
+	isMain?: boolean;
+}
+
+const { isMain } = Astro.props;
 ---
 
 <header class="flex w-full">
 	<nav class='my-5 flex justify-end flex-1'>
+		{!isMain && <div class="flex-1  text-cp-sapphire">{SITE_TITLE}</h1>}
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="https://github.com/korneliuszw" target="_blank">GitHub</HeaderLink>
 		<HeaderLink href="https://git.kawuka.xyz" target="_blank">Self-hosted Git</HeaderLink>
